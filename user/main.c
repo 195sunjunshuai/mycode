@@ -29,8 +29,8 @@
 #include "semphr.h"
 #include "event_groups.h"
 #include "timers.h"
-#include "lvgl.h"    //½Ó¿ÚµÄÊÊÅä  18
-#include "lv_port_disp.h"    //½Ó¿ÚµÄÊÊÅä  19
+#include "lvgl.h"    //ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  18
+#include "lv_port_disp.h"    //ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  19
 #include "lvgl_app.h"
 #include "Fontdownload.h"
 #include "gui_guider.h" 
@@ -43,8 +43,8 @@
 #include "iwdg.h"
 
 void Delay(void);
-//ÈÎÎñµÄ¾ä±ú(Ö¸ÏòÄ³¸öÄÚ´æÇøÓòµÄÖ¸Õë),Ïàµ±ÓÚÈÎÎñµÄÉí·ÝÖ¤,Ö¸ÏòÈÎÎñÓÅÏÈ¼¶¡¢Èë¿Úº¯ÊýµÈÐÅÏ¢¡£
-//ºóÐøµÄºÜ¶à²Ù×÷¶¼ÊÇÒÔ¾ä±ú×÷Îª²Ù×÷¶ÔÏó
+//ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½(Ö¸ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½),ï¿½àµ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤,Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ÄºÜ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 TaskHandle_t xHandle_LED1 = NULL; 
 TaskHandle_t xHandle_RELAY = NULL; 
 TaskHandle_t xHandle_KEY = NULL; 
@@ -55,25 +55,25 @@ TaskHandle_t xHandle_BH1750 = NULL;
 TaskHandle_t xHandle_DHT11 = NULL;
 TaskHandle_t xHandle_ESP = NULL;
 TaskHandle_t xHandle_ESP_TIME = NULL;
-TaskHandle_t xLvglTaskHandle = NULL;  //½Ó¿ÚµÄÊÊÅä  25
+TaskHandle_t xLvglTaskHandle = NULL;  //ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  25
 TaskHandle_t xHandle_UPDATE = NULL;
 TaskHandle_t xHandle_IWDG = NULL;
 
-//¾ä±ú,¾ä±ú¾ÍÊÇÀàËÆÓÚÉí·ÝÖ¤
-SemaphoreHandle_t xSemaphore = NULL;    //´´½¨¶þÖµÐÅºÅÁ¿¾ä±ú
-SemaphoreHandle_t xSemaphore_Count = NULL;    //´´½¨¼ÆÊýÐÅºÅÁ¿¾ä±ú
-SemaphoreHandle_t xSemaphore_Mutex = NULL;    //´´½¨»¥³âÐÅºÅÁ¿¾ä±ú  
-SemaphoreHandle_t xSemaphore_Mutex_Printf = NULL;    //´´½¨printf»¥³âÐÅºÅÁ¿¾ä±ú  
+//ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤
+SemaphoreHandle_t xSemaphore = NULL;    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+SemaphoreHandle_t xSemaphore_Count = NULL;    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+SemaphoreHandle_t xSemaphore_Mutex = NULL;    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
+SemaphoreHandle_t xSemaphore_Mutex_Printf = NULL;    //ï¿½ï¿½ï¿½ï¿½printfï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 
-QueueHandle_t		xQueue=NULL;     //´´½¨ÏûÏ¢¶ÓÁÐµÄ¾ä±ú
-QueueHandle_t   xQueue_AP=NULL;     //´´½¨APÄ£Ê½ÏûÏ¢¶ÓÁÐµÄ¾ä±ú
-QueueHandle_t   xQueue_Update=NULL;     //´´½¨¸üÐÂÏûÏ¢¶ÓÁÐµÄ¾ä±ú
+QueueHandle_t		xQueue=NULL;     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ÐµÄ¾ï¿½ï¿½
+QueueHandle_t   xQueue_AP=NULL;     //ï¿½ï¿½ï¿½ï¿½APÄ£Ê½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ÐµÄ¾ï¿½ï¿½
+QueueHandle_t   xQueue_Update=NULL;     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ÐµÄ¾ï¿½ï¿½
 
-EventGroupHandle_t xCreatedEventGroup;     //´´½¨ÊÂ¼þ¾ä±ú
+EventGroupHandle_t xCreatedEventGroup;     //ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 
-TimerHandle_t xTimer = NULL;   //Èí¼þ¶¨Ê±Æ÷¾ä±ú
-TimerHandle_t xTimer1 = NULL;   //Èí¼þ¶¨Ê±Æ÷¾ä±ú
-TimerHandle_t xTimer2 = NULL;   //Èí¼þ¶¨Ê±Æ÷¾ä±ú
+TimerHandle_t xTimer = NULL;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+TimerHandle_t xTimer1 = NULL;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+TimerHandle_t xTimer2 = NULL;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
 
 uint8_t *temp=NULL;
 uint8_t *temp1=NULL; 
@@ -86,11 +86,11 @@ int main()
 int main(void)
 {	
   BaseType_t xReturned;	
-#if (USE_STD_LIB==0) //Ö»ÒªÊ¹ÓÃÖÐ¶Ï£¬±ØÐëµ÷ÓÃÖÐ¶Ï·Ö×é
-	NVIC_SetPriorityGrouping(3);    //ÖÐ¶ÏÓÅÏÈ¼¶·Ö×é£¬¿ª»úµ÷ÓÃ1´Î
-//core_cm3.h 1430ÐÐ    ·Ö×éÈ·¶¨Ö®ºó£¬ÇÀÕ¼ºÍ´Î¼¶ÓÅÏÈ¼¶ÒªÔÚÔÊÐí·¶Î§ÄÚ
+#if (USE_STD_LIB==0) //Ö»ÒªÊ¹ï¿½ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½
+	NVIC_SetPriorityGrouping(3);    //ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½
+//core_cm3.h 1430ï¿½ï¿½    ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½Í´Î¼ï¿½ï¿½ï¿½ï¿½È¼ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½
 #elif (USE_STD_LIB==1)	
-//void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup);	misc.h 196ÐÐ
+//void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup);	misc.h 196ï¿½ï¿½
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 #endif
 	UART1_Config();	
@@ -108,145 +108,145 @@ int main(void)
 	W25Q64_ReadID_0x90();
 	PARA_Init();
 	RTC_Config();
-	lv_init();    //LVGLµÄ³õÊ¼»¯   //½Ó¿ÚµÄÊÊÅä  20
-	lv_port_disp_init();    //LVGLÏÔÊ¾Éè±¸µÄ³õÊ¼»¯   //½Ó¿ÚµÄÊÊÅä  21
+	lv_init();    //LVGLï¿½Ä³ï¿½Ê¼ï¿½ï¿½   //ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  20
+	lv_port_disp_init();    //LVGLï¿½ï¿½Ê¾ï¿½è±¸ï¿½Ä³ï¿½Ê¼ï¿½ï¿½   //ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  21
   ESP_Config();
 	w25q_bg_decoder_register();
 	IWDG_Init();
 	
-	//´´½¨ÈÎÎñµÄÊ±ºò£¬Õ»¿Õ¼ä·ÖÅä¶à´ó  https://www.freertos.org/zh-cn-cmn-s/Why-FreeRTOS/FAQs/Memory-usage-boot-times-context#how-big-should-the-stack-be 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Õ»ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  https://www.freertos.org/zh-cn-cmn-s/Why-FreeRTOS/FAQs/Memory-usage-boot-times-context#how-big-should-the-stack-be 
   xReturned = xTaskCreate(
-                  vTaskLED1,       //ÈÎÎñº¯ÊýµÄÈë¿ÚµØÖ·,ÈÎÎñ¶¼ÊÇ²»ÍË³öµÄÑ­»·
-                  "vTaskLED1",     //ÈÎÎñµÄÃèÊöÐÔÃû³Æ,ÎÞÊµ¼ÊÒâ
-									83,             //ÈÎÎñµÄ¶ÑÕ»¿Õ¼ä´óÐ¡  µ¥Î»:×Ö  1×Ö=4×Ö½Ú
-                  NULL,            //ÈÎÎñ²ÎÊý
-                  1,//ÈÎÎñµÄÓÅÏÈ¼¶,Êý×ÖÔ½´óÓÅÏÈ¼¶Ô½¸ß¡£ÓÅÏÈ¼¶Ä¬ÈÏÉÏÏÞÎª (configMAX_PRIORITIES - 1)
-                  &xHandle_LED1 );      //ÈÎÎñµÄ¾ä±ú
+                  vTaskLED1,       //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ö·,ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ë³ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
+                  "vTaskLED1",     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½
+									83,             //ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½Õ»ï¿½Õ¼ï¿½ï¿½Ð¡  ï¿½ï¿½Î»:ï¿½ï¿½  1ï¿½ï¿½=4ï¿½Ö½ï¿½
+                  NULL,            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                  1,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½,ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½È¼ï¿½Ô½ï¿½ß¡ï¿½ï¿½ï¿½ï¿½È¼ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª (configMAX_PRIORITIES - 1)
+                  &xHandle_LED1 );      //ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½
 	if(xReturned==pdPASS)
-	{printf("LED1ÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("LED1ï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
   xReturned = xTaskCreate(vTaskRELAY,"vTaskLED2",80,NULL,2,&xHandle_RELAY ); 
 	if(xReturned==pdPASS)
-	{printf("RELAYÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("RELAYï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
   xReturned = xTaskCreate(vTaskKEY,"vTaskKEY",500,NULL,8,&xHandle_KEY ); 
 	if(xReturned==pdPASS)
-	{printf("KEYÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("KEYï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}		
   xReturned = xTaskCreate(vTaskKQM,"vTaskKQM",90,NULL,4,&xHandle_KQM ); 
 	if(xReturned==pdPASS)
-	{printf("KQMÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("KQMï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}	
   xReturned = xTaskCreate(vTaskSU03T,"vTaskSU03T",128,NULL,5,&xHandle_SU03T ); 
 	if(xReturned==pdPASS)
-	{printf("SU03TÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("SU03Tï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
   xReturned = xTaskCreate(vTaskSMOKE,"vTaskSMOKE",88,NULL,6,&xHandle_SMOKE ); 
 	if(xReturned==pdPASS)
-	{printf("SMOKEÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("SMOKEï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}	
 	xReturned = xTaskCreate(vTaskBH1750,"vTaskBH1750",88,NULL,3,&xHandle_BH1750 ); 
 	if(xReturned==pdPASS)
-	{printf("BH1750ÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("BH1750ï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
 	xReturned = xTaskCreate(vTaskESP,"vTaskESP",360,NULL,7,&xHandle_ESP ); 
 	if(xReturned==pdPASS)
-	{printf("ESPÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("ESPï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
 	xReturned = xTaskCreate(vTaskDHT11,"vTaskDHT11",88,NULL,9,&xHandle_DHT11 ); 
 	if(xReturned==pdPASS)
-	{printf("DHT11ÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("DHT11ï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
-	//½Ó¿ÚµÄÊÊÅä  28
+	//ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  28
 	xReturned = xTaskCreate(vLvglTaskFunction, "lvgl_task", 512, NULL, 9, &xLvglTaskHandle);	
 	if(xReturned==pdPASS)
-	{printf("LVGLÈÎÎñ´´½¨³É¹¦\r\n");
+	{
 	}
 	xReturned = xTaskCreate(vTaskUPDATE, "vTaskUPDATE", 216, NULL, 9, &xHandle_UPDATE);	
 	if(xReturned==pdPASS)
-	{printf("¸üÐÂLVGLÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("ï¿½ï¿½ï¿½ï¿½LVGLï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
 	xReturned = xTaskCreate(vTaskIWDG, "vTaskIWDG", 128, NULL, 1, &xHandle_IWDG);	
 	if(xReturned==pdPASS)
-	{printf("¸üÐÂLVGLÈÎÎñ´´½¨³É¹¦\r\n");
+	{printf("ï¿½ï¿½ï¿½ï¿½LVGLï¿½ï¿½ï¿½ñ´´½ï¿½ï¿½É¹ï¿½\r\n");
 	}
 	
-	//·µ»ØÖµ  ¶þÖµÐÅºÅÁ¿¾ä±ú 
-	xSemaphore = xSemaphoreCreateBinary();   //´´½¨¶þÖµÐÅºÅÁ¿
+	//ï¿½ï¿½ï¿½ï¿½Öµ  ï¿½ï¿½Öµï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	xSemaphore = xSemaphoreCreateBinary();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Åºï¿½ï¿½ï¿½
 	if(xSemaphore!=NULL)
-	{printf("KQM¶þÖµÐÅºÅÁ¿´´½¨³É¹¦\r\n");	
+	{printf("KQMï¿½ï¿½Öµï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");	
 	}
-	xSemaphoreGive(xSemaphore);   //ÊÍ·ÅÐÅºÅÁ¿,ÈÃ¸ßµÍÓÅÏÈ¼¶ÈÎÎñÉêÇë
-	xSemaphore_Mutex = xSemaphoreCreateMutex();   //´´½¨»¥³âÐÅºÅÁ¿
+	xSemaphoreGive(xSemaphore);   //ï¿½Í·ï¿½ï¿½Åºï¿½ï¿½ï¿½,ï¿½Ã¸ßµï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	xSemaphore_Mutex = xSemaphoreCreateMutex();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½
 	if(xSemaphore_Mutex!=NULL)
-	{printf("»¥³âÐÅºÅÁ¿´´½¨³É¹¦\r\n");	
+	{printf("ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");	
 	}	
-	xSemaphore_Mutex_Printf=xSemaphoreCreateMutex();   //´´½¨»¥³âÐÅºÅÁ¿
+	xSemaphore_Mutex_Printf=xSemaphoreCreateMutex();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½
 	if(xSemaphore_Mutex_Printf!=NULL)
-	{safe_printf("printf»¥³âÐÅºÅÁ¿´´½¨³É¹¦\r\n");	
+	{safe_printf("printfï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");	
 	}	
-	//´´½¨ÏûÏ¢¶ÓÁÐ
-	//²ÎÊý1    ¸Ã»º³åÇø×Ü¹²´æ·Å¶àÉÙ¸öÏûÏ¢
-	//²ÎÊý2    Ã¿¸öÏûÏ¢µÄ´óÐ¡
-	//·µ»ØÖµ   ÏûÏ¢¶ÓÁÐµÄ¾ä±ú   µ¥Î»:×Ö½Ú
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½1    ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½Å¶ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½Ï¢
+	//ï¿½ï¿½ï¿½ï¿½2    Ã¿ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä´ï¿½Ð¡
+	//ï¿½ï¿½ï¿½ï¿½Öµ   ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ÐµÄ¾ï¿½ï¿½   ï¿½ï¿½Î»:ï¿½Ö½ï¿½
   xQueue = xQueueCreate(1,8);
 	if(xQueue != NULL)
-	{printf("KQMÏûÏ¢¶ÓÁÐ´´½¨³É¹¦\r\n");		
+	{printf("KQMï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");		
 	}	
   xQueue_AP = xQueueCreate(1,1); 
   if(xQueue_AP != NULL) 
-  {printf("APÄ£Ê½ÏûÏ¢¶ÓÁÐ´´½¨³É¹¦\r\n");   
+  {printf("APÄ£Ê½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");   
   }
   xQueue_Update=xQueueCreate(1,1);
   if(xQueue_Update != NULL) 
-  {printf("¸üÐÂÏûÏ¢¶ÓÁÐ´´½¨³É¹¦\r\n");   
+  {printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");   
   } 	
-	//´´½¨ÊÂ¼þ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	xCreatedEventGroup = xEventGroupCreate();
 	if(xCreatedEventGroup!=NULL)
-	{printf("SU03TÊÂ¼þ´´½¨³É¹¦\r\n");		
+	{printf("SU03Tï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");		
 	}
 
-	//²ÎÊý1  ¶¨Ê±Æ÷µÄ¿É¶ÁÎÄ±¾Ãû³Æ,Ã»ÓÐÉ¶Êµ¼ÊÒâÒå
-	//²ÎÊý2  ¶¨Ê±Æ÷µÄÖÜÆÚ
-	//²ÎÊý3  ¶¨Ê±Æ÷µÄÄ£Ê½  pdTRUE  ÖÜÆÚÄ£Ê½  pdFALSE  µ¥´ÎÄ£Ê½
-	//²ÎÊý4  ·ÖÅä¸øÕýÔÚ´´½¨µÄ¶¨Ê±Æ÷µÄ±êÊ¶·û¡£Í¨³£Çé¿öÏÂ£¬µ±Í¬Ò»»Øµ÷º¯Êý·ÖÅä¸ø¶à¸ö¶¨Ê±Æ÷Ê±£¬¸Ãº¯Êý½«ÓÃÓÚ¶¨Ê±Æ÷»Øµ÷º¯Êý£¬ ÒÔÊ¶±ðÄÄ¸ö¶¨Ê±Æ÷¹ýÆÚ
-	//²ÎÊý5  ¶¨Ê±Æ÷µÄ»Øµ÷º¯Êý
-	//·µ»ØÖµ ¶¨Ê±Æ÷µÄ¾ä±ú
+	//ï¿½ï¿½ï¿½ï¿½1  ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ä¿É¶ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½,Ã»ï¿½ï¿½É¶Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½2  ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½3  ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ä£Ê½  pdTRUE  ï¿½ï¿½ï¿½ï¿½Ä£Ê½  pdFALSE  ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+	//ï¿½ï¿½ï¿½ï¿½4  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½Ê±ï¿½ï¿½ï¿½Ä±ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½Í¬Ò»ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½Ê±ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½5  ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ä»Øµï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½Öµ ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½
 	xTimer1=xTimerCreate("xTimer1",1000*60*60,pdTRUE,( void * ) 1,vCallbackFunction_Time1);
 	if(xTimer1!=NULL)
-	{printf("Èí¼þ¶¨Ê±Æ÷1´´½¨³É¹¦\r\n");		
-		//²ÎÊý1  Èí¼þ¶¨Ê±Æ÷¾ä±ú
-		//²ÎÊý2  ×èÈûÊ±¼ä  ÔÚÒÔÏÂÇé¿öÏÂ£¬xBlockTime½«±»ºöÂÔ£ºxTimerStart()ÔÚ RTOS µ÷¶ÈÆ÷Æô¶¯Ö®Ç°¾Í±»µ÷ÓÃ¡£
-		if(xTimerStart(xTimer1,0)==pdPASS)     //Æô¶¯Èí¼þ¶¨Ê±Æ÷
-		{printf("Èí¼þ¶¨Ê±Æ÷1Æô¶¯³É¹¦\r\n");				
+	{printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");		
+		//ï¿½ï¿½ï¿½ï¿½1  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½2  ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½xBlockTimeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½xTimerStart()ï¿½ï¿½ RTOS ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½Í±ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½
+		if(xTimerStart(xTimer1,0)==pdPASS)     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+		{printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");				
 		}
 	}
 //	xTimer2=xTimerCreate("xTimer2",3000,pdFALSE,( void * ) 2,vCallbackFunction_Time2);	
 //	if(xTimer2!=NULL)
-//	{printf("Èí¼þ¶¨Ê±Æ÷2´´½¨³É¹¦\r\n");		
-//		if(xTimerStart(xTimer2,0)==pdPASS)     //Æô¶¯Èí¼þ¶¨Ê±Æ÷
+//	{printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");		
+//		if(xTimerStart(xTimer2,0)==pdPASS)     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 //		{
-//			printf("Èí¼þ¶¨Ê±Æ÷2Æô¶¯³É¹¦\r\n");				
+//			printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");				
 //		}	
 //	}
 	xTimer=xTimerCreate("xTimer",1000,pdTRUE,( void * ) 1,vCallbackFunction_Time);
 	if(xTimer!=NULL)
-	{printf("Èí¼þ¶¨Ê±Æ÷1´´½¨³É¹¦\r\n");		
-		//²ÎÊý1  Èí¼þ¶¨Ê±Æ÷¾ä±ú
-		//²ÎÊý2  ×èÈûÊ±¼ä  ÔÚÒÔÏÂÇé¿öÏÂ£¬xBlockTime½«±»ºöÂÔ£ºxTimerStart()ÔÚ RTOS µ÷¶ÈÆ÷Æô¶¯Ö®Ç°¾Í±»µ÷ÓÃ¡£
-		if(xTimerStart(xTimer,0)==pdPASS)     //Æô¶¯Èí¼þ¶¨Ê±Æ÷
-		{printf("Èí¼þ¶¨Ê±Æ÷Æô¶¯³É¹¦\r\n");				
+	{printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");		
+		//ï¿½ï¿½ï¿½ï¿½1  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½2  ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â£ï¿½xBlockTimeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½xTimerStart()ï¿½ï¿½ RTOS ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½Í±ï¿½ï¿½ï¿½ï¿½Ã¡ï¿½
+		if(xTimerStart(xTimer,0)==pdPASS)     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+		{printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½\r\n");				
 		}
 	}
-	vTaskStartScheduler();  //´´½¨Íê³ÉÈÎÎñÖ®ºó,Æô¶¯µ÷¶ÈÆ÷,Æô¶¯µ÷¶ÈÆ÷Ö®ºóµÄ´úÂë¶¼²»»áÖ´ÐÐ
+	vTaskStartScheduler();  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ä´ï¿½ï¿½ë¶¼ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½
 	while (1)
-	{printf("´ó¼Ò¿´¿´ÊÇ·ñ¿ÉÒÔÖ´ÐÐµ½Õâ¾ä»°\r\n");
+	{printf("ï¿½ï¿½Ò¿ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ðµï¿½ï¿½ï¿½ä»°\r\n");
 	}
 }
  
 void vTaskLED1( void * pvParameters )
-{ //LEDµÆ
+{ //LEDï¿½ï¿½
 	
 	for( ;; )
 	{
@@ -259,33 +259,33 @@ void vTaskLED1( void * pvParameters )
 		else{
 			LED3_OFF();
 		}
-		vTaskDelay(1000);  //ÏµÍ³µÄÑÓÊ±,»áÊÍ·ÅCPU  ²ÎÊý:ÒªÑÓÊ±µÄ½ÚÅÄÊý 
+		vTaskDelay(1000);  //ÏµÍ³ï¿½ï¿½ï¿½ï¿½Ê±,ï¿½ï¿½ï¿½Í·ï¿½CPU  ï¿½ï¿½ï¿½ï¿½:Òªï¿½ï¿½Ê±ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	}
 }
 
 void vTaskRELAY( void * pvParameters )
-{ //¼ÌµçÆ÷
+{ //ï¿½Ìµï¿½ï¿½ï¿½
 					  uint32_t freeheap=0;
-	TaskStatus_t taskinfo;//ÈÎÎñ×´Ì¬
+	TaskStatus_t taskinfo;//ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	for( ;; )
 	{
-//		//#define configTOTAL_HEAP_SIZE ( ( size_t ) ( 17 * 1024 ) ) //ÏµÍ³ËùÓÐ×ÜµÄ¶Ñ´óÐ¡  64K¿Õ¼ä·ÖÅä
-//		freeheap=xPortGetFreeHeapSize();//»ñÈ¡ÏµÍ³Ê£Óà¶ÑÕ»×Ü¿Õ¼ä´óÐ¡
-//		printf("Õû¸öÏµÍ³Ê£Óà¶ÑÕ»¿Õ¼ä´óÐ¡£º%d×Ö½Ú\r\n",freeheap);
-////		//»ñÈ¡Ä³Ò»ÈÎÎñµÄ×´Ì¬ÐÅÏ¢
-////		//ÔÚFreeRTOSConfig.hÎÄ¼þÖÐºêÖÃ1 #define configUSE_TRACE_FACILITY 1 //ÆôÓÃ¿ÉÊÓ»¯¸ú×Ùµ÷ÊÔ
-//		vTaskGetInfo(xHandle_LED1,&taskinfo,pdTRUE,eInvalid);//ÈÎÎñ¾ä±ú »ñÈ¡µ½µÄÈÎÎñ×´Ì¬ÐÅÏ¢ »ñÈ¡µ½µÄ¶ÑÕ»Ê£Óà¿Õ¼ä 
-//		printf("RELAYTask_HandleÊ£Óà¶ÑÕ»¿Õ¼ä´óÐ¡£º%d×Ö\r\n",taskinfo.usStackHighWaterMark);
+//		//#define configTOTAL_HEAP_SIZE ( ( size_t ) ( 17 * 1024 ) ) //ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ÜµÄ¶Ñ´ï¿½Ð¡  64Kï¿½Õ¼ï¿½ï¿½ï¿½ï¿½
+//		freeheap=xPortGetFreeHeapSize();//ï¿½ï¿½È¡ÏµÍ³Ê£ï¿½ï¿½ï¿½Õ»ï¿½Ü¿Õ¼ï¿½ï¿½Ð¡
+//		printf("ï¿½ï¿½ï¿½ï¿½ÏµÍ³Ê£ï¿½ï¿½ï¿½Õ»ï¿½Õ¼ï¿½ï¿½Ð¡ï¿½ï¿½%dï¿½Ö½ï¿½\r\n",freeheap);
+////		//ï¿½ï¿½È¡Ä³Ò»ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ï¢
+////		//ï¿½ï¿½FreeRTOSConfig.hï¿½Ä¼ï¿½ï¿½Ðºï¿½ï¿½ï¿½1 #define configUSE_TRACE_FACILITY 1 //ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½Ùµï¿½ï¿½ï¿½
+//		vTaskGetInfo(xHandle_LED1,&taskinfo,pdTRUE,eInvalid);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ï¢ ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ä¶ï¿½Õ»Ê£ï¿½ï¿½Õ¼ï¿½ 
+//		printf("RELAYTask_HandleÊ£ï¿½ï¿½ï¿½Õ»ï¿½Õ¼ï¿½ï¿½Ð¡ï¿½ï¿½%dï¿½ï¿½\r\n",taskinfo.usStackHighWaterMark);
 //		RELAY_TOGGLE();
 		vTaskDelay(1500);		
 	}
 }
 
 void vTaskKEY( void * pvParameters )
-{ //°´¼ü
+{ //ï¿½ï¿½ï¿½ï¿½
   TickType_t xLastWakeTime;
-  const TickType_t xFrequency = 10;  //ÏëÒªµÄ¾ø¶ÔÑÓÊ±ÖÜÆÚ£¬µ¥Î»£ºÏµÍ³½ÚÅÄ
-  xLastWakeTime = xTaskGetTickCount();	 //»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä
+  const TickType_t xFrequency = 10;  //ï¿½ï¿½Òªï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½
+  xLastWakeTime = xTaskGetTickCount();	 //ï¿½ï¿½È¡ï¿½ï¿½Ç°ÏµÍ³Ê±ï¿½ï¿½
 	for( ;; )
 	{
 		Key_Handle();
@@ -298,7 +298,7 @@ void vTaskKQM( void * pvParameters )
 //  BaseType_t xReturn_Value=0; 
 //	while(1)
 //	{
-//	 xReturn_Value =xSemaphoreTake(xSemaphore,2000);  //Ò»Ö±µÈ,Ö±µ½µÈµ½ÐÅºÅÁ¿,´òÓ¡³É¹¦ 
+//	 xReturn_Value =xSemaphoreTake(xSemaphore,2000);  //Ò»Ö±ï¿½ï¿½,Ö±ï¿½ï¿½ï¿½Èµï¿½ï¿½Åºï¿½ï¿½ï¿½,ï¿½ï¿½Ó¡ï¿½É¹ï¿½ 
 //	 if(xReturn_Value==pdTRUE) 
 //	 { 
 //		 KQM_Handle(); 
@@ -313,10 +313,10 @@ void vTaskKQM( void * pvParameters )
 		if(xReturn_Value==pdTRUE)
 		{
 			if(Buff[0]==0x5F)
-			{//µØÖ·ÂëÕýÈ·
+			{//ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½È·
 				data_cs=Buff[0]+Buff[1]+Buff[2]+Buff[3]+Buff[4]+Buff[5]+Buff[6];
 				if(data_cs==Buff[7])
-				{//Ð£ÑéÍ¨¹ý
+				{//Ð£ï¿½ï¿½Í¨ï¿½ï¿½
 					Sensor.VOC = ((Buff[1]<<8)+Buff[2])*0.1;
 	//				Sensor.VOC = (Buff[1]*0x100+Buff[2])*0.1;
 					Sensor.CH2O = ((Buff[3]<<8)+Buff[4])*0.01;
@@ -324,19 +324,19 @@ void vTaskKQM( void * pvParameters )
 //					printf("VOC=%.1f,CH2O=%.2f,CO2=%d\r\n",Sensor.VOC,Sensor.CH2O,Sensor.CO2);
 				}
 				else
-				{//Ð£Ñé²»Í¨¹ý
-					printf("Ð£Ñé²»Í¨¹ý\r\n");
+				{//Ð£ï¿½é²»Í¨ï¿½ï¿½
+					printf("Ð£ï¿½é²»Í¨ï¿½ï¿½\r\n");
 				}
 			}
 			else
-			{//µØÖ·Âë²»ÕýÈ·
-				printf("µØÖ·Âë²»ÕýÈ·\r\n");
+			{//ï¿½ï¿½Ö·ï¿½ë²»ï¿½ï¿½È·
+				printf("ï¿½ï¿½Ö·ï¿½ë²»ï¿½ï¿½È·\r\n");
 			}
 			KQM_Clear_R_Buff();	
 		}
 		else
 		{
-			printf("KQM6600ÏûÏ¢¶ÓÁÐ»ñÈ¡Ê§°Ü\r\n");
+			printf("KQM6600ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ð»ï¿½È¡Ê§ï¿½ï¿½\r\n");
 		}	
 	}
 }
@@ -346,12 +346,12 @@ void vTaskSU03T( void * pvParameters )
 	EventBits_t uxBits;	
 	for( ;; )
 	{
-		//²ÎÊý1  ÊÂ¼þ¾ä±ú
-		//²ÎÊý2  ¹ØÏµµÄÎ» 
-		//²ÎÊý3  ÍË³öµÄÊ±ºò,ÊÇ·ñÇå³ý¶ÔÓ¦µÄÎ»  pdTRUE   pdFALSE  ²»Çå³ýÐèÒªµ÷ÓÃº¯ÊýxEventGroupClearBitsÊÖ¶¯Çå³ý
-		//²ÎÊý4  ÊÇ·ñÐèÒª¹ØÐÄµÄÎ»¶¼Âú×ã   pdTRUE   pdFALSE
-		//²ÎÊý5  µÈ´ýµÄÊ±¼ä £¨ÒÔµÎ´ðÎªµ¥Î»£©
-						//²ÎÊý2ÓÐ3ÖÖÐ´·¨   1.0  ²»µÈ´ý   2.·Ç0ÕûÊý   µÈ¹Ì¶¨Ê±¼ä   3.portMAX_DELAY  Ò»Ö±µÈ,Ö±µ½µÈµ½ÐÅºÅÁ¿
+		//ï¿½ï¿½ï¿½ï¿½1  ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½2  ï¿½ï¿½Ïµï¿½ï¿½Î» 
+		//ï¿½ï¿½ï¿½ï¿½3  ï¿½Ë³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½,ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Î»  pdTRUE   pdFALSE  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½xEventGroupClearBitsï¿½Ö¶ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½4  ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Äµï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   pdTRUE   pdFALSE
+		//ï¿½ï¿½ï¿½ï¿½5  ï¿½È´ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½ÔµÎ´ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½
+						//ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½3ï¿½ï¿½Ð´ï¿½ï¿½   1.0  ï¿½ï¿½ï¿½È´ï¿½   2.ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½   ï¿½È¹Ì¶ï¿½Ê±ï¿½ï¿½   3.portMAX_DELAY  Ò»Ö±ï¿½ï¿½,Ö±ï¿½ï¿½ï¿½Èµï¿½ï¿½Åºï¿½ï¿½ï¿½
 		uxBits=xEventGroupWaitBits(xCreatedEventGroup,BIT_0,pdTRUE,pdTRUE,portMAX_DELAY);
 		if(uxBits==BIT_0)
 		{
@@ -359,13 +359,13 @@ void vTaskSU03T( void * pvParameters )
 		}
 		else 
 		{
-			printf("SU03TÊÂ¼þÃ»·¢Éú\r\n");
+			printf("SU03Tï¿½Â¼ï¿½Ã»ï¿½ï¿½ï¿½ï¿½\r\n");
 		}		
 	}
 }
 
 void vTaskSMOKE( void * pvParameters )
-{ //ÑÌÎí
+{ //ï¿½ï¿½ï¿½ï¿½
 	while(1)
 	{
 		ADC_Handle();
@@ -399,10 +399,10 @@ void vTaskESP( void * pvParameters )
 		xReturned=xQueueReceive(xQueue_AP,&Message,0); 
    if(xReturned== pdTRUE) 
    { 
-    NET_State=Message;    //NET_StateÇÐ»»³É6 
+    NET_State=Message;    //NET_Stateï¿½Ð»ï¿½ï¿½ï¿½6 
     NET_Step=0; 
-//   printf("½ÓÊÕAPÏûÏ¢³É¹¦,×¼±¸ÇÐ»»³ÉAPÄ£Ê½\r\n"); 
-    safe_printf("½ÓÊÕAPÏûÏ¢³É¹¦,×¼±¸ÇÐ»»³ÉAPÄ£Ê½\r\n"); 
+//   printf("ï¿½ï¿½ï¿½ï¿½APï¿½ï¿½Ï¢ï¿½É¹ï¿½,×¼ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½APÄ£Ê½\r\n"); 
+    safe_printf("ï¿½ï¿½ï¿½ï¿½APï¿½ï¿½Ï¢ï¿½É¹ï¿½,×¼ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½APÄ£Ê½\r\n"); 
    } 
 
 		if(NET_State==0)
@@ -445,70 +445,70 @@ void vTaskESP( void * pvParameters )
 			printf("%d\r\n",NET_State);
     } 
 		if(esp.R_Idle==1&&NET_State==5)
-		{//ÍøÂç×´Ì¬µÈÓÚ3£¬²¢ÊÕµ½ÏÂÐÐÊý¾Ý
+		{//ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			esp.R_Idle=0;
 			if(esp.R_Buff[0]==0x30)
 			{
 //{"paras":{"relay_switch":"1"},"service_id":"Device_205","command_name":"led_switch"}
-				printf("ÊÕµ½Æ½Ì¨µÄÏÂ·¢ÉèÖÃ±¨ÎÄ\r\n");
-//temp=(uint8_t *)strstr((char *)Esp.R_Buff,"led_switch"); ²»ÄÜÕâÑù²éÕÒ£¬ÒòÎªÇ°ÃæÓÐ0
-				//Èç¹ûÓÐ¶à¸ö¿ª¹Ø£¬¾ÍÐ´¶à¸öÕâÑù²éÕÒºÍ½âÎö
+				printf("ï¿½Õµï¿½Æ½Ì¨ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½\r\n");
+//temp=(uint8_t *)strstr((char *)Esp.R_Buff,"led_switch"); ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ÎªÇ°ï¿½ï¿½ï¿½ï¿½0
+				//ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒºÍ½ï¿½ï¿½ï¿½
 				temp=(uint8_t *)strstr((char *)&esp.R_Buff[4],"led_switch");
 				temp1=(uint8_t *)strstr((char *)&esp.R_Buff[4],"relay_switch");
 				if(temp!=NULL)
-				{//²éÕÒµ½ÁË£¬·µ»Øled_switchÖÐµÄlËùÔÚµÄµØÖ·
-					temp+=13; //Æ«ÒÆµ½µÆ×´Ì¬0/1ËùÔÚÎ»ÖÃ
+				{//ï¿½ï¿½ï¿½Òµï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½led_switchï¿½Ðµï¿½lï¿½ï¿½ï¿½ÚµÄµï¿½Ö·
+					temp+=13; //Æ«ï¿½Æµï¿½ï¿½ï¿½×´Ì¬0/1ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 					if(*temp=='1')
-					{//¿ªµÆ
+					{//ï¿½ï¿½ï¿½ï¿½
 						LED2_ON();
 					}
 					else if(*temp=='0')
-					{//¹ØµÆ
+					{//ï¿½Øµï¿½
 						LED2_OFF();						
 					}
 				}
 					if(temp1!=NULL)
-				{//²éÕÒµ½ÁË£¬·µ»Øled_switchÖÐµÄlËùÔÚµÄµØÖ·
-					temp1+=15; //Æ«ÒÆµ½µÆ×´Ì¬0/1ËùÔÚÎ»ÖÃ
+				{//ï¿½ï¿½ï¿½Òµï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½led_switchï¿½Ðµï¿½lï¿½ï¿½ï¿½ÚµÄµï¿½Ö·
+					temp1+=15; //Æ«ï¿½Æµï¿½ï¿½ï¿½×´Ì¬0/1ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 					if(*temp1=='1')
-					{//¿ªµÆ
+					{//ï¿½ï¿½ï¿½ï¿½
 						RELAY_ON();
 					}
 					else if(*temp1=='0')
-					{//¹ØµÆ
+					{//ï¿½Øµï¿½
 						RELAY_OFF();						
 					}
 				}
 			}
 			if(esp.R_Buff[0]==0xD0)
 			{
-				printf("ÊÕµ½Æ½Ì¨µÄÐÄÌø»Ø¸´\r\n");				
+				printf("ï¿½Õµï¿½Æ½Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½\r\n");				
 			}
-			ESP_Clear_R_Buff();  //Çå³ýÒ»ÏÂ½ÓÊÕ»º³åÇø£¬·½±ãÖØÍ·½ÓÊÕ
+			ESP_Clear_R_Buff();  //ï¿½ï¿½ï¿½Ò»ï¿½Â½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½
 		}
 		vTaskDelay(2000);
 	 }		
 }
 void vLvglTaskFunction( void * pvParameters )
-{ //½Ó¿ÚµÄÊÊÅä  26
+{ //ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  26
 	TickType_t xLastWakeTime;
 	const TickType_t xPeriod = pdMS_TO_TICKS( 5 );
 	xLastWakeTime = xTaskGetTickCount(); 
-//  setup_scr_screen(&guider_ui);    //´´½¨ÆÁÄ»1ºÍÆÁÄ»ÖÐµÄ¶ÔÏó 
-  setup_scr_screen_1(&guider_ui);    //´´½¨ÆÁÄ»2ºÍÆÁÄ»ÖÐµÄ¶ÔÏó 
-  lv_scr_load(guider_ui.screen_1);    //¼ÓÔØÆÁÄ»1  	
+//  setup_scr_screen(&guider_ui);    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»1ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ÐµÄ¶ï¿½ï¿½ï¿½ 
+  setup_scr_screen_1(&guider_ui);    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»2ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ÐµÄ¶ï¿½ï¿½ï¿½ 
+  lv_scr_load(guider_ui.screen_1);    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»1  	
 //	xTimerStart(xTimer,0);
 //	Lvgl_Demo11();
 	for(;;)
 	{		
 		lv_task_handler();
-		vTaskDelayUntil( &xLastWakeTime, xPeriod );//¾ø¶ÔÑÓÊ±
+		vTaskDelayUntil( &xLastWakeTime, xPeriod );//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±
 	}
 }
 
 
 void vTaskUPDATE ( void * pvParameters )
-{ //¸üÐÂÌìÆø
+{ //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	uint8_t Message; 
 	for( ; ; )
 	{
@@ -528,7 +528,7 @@ void vTaskUPDATE ( void * pvParameters )
 	      lv_label_set_text_fmt(guider_ui.screen_1_label_1_25,"%d",weather_nb_high);
 				if(weather_code>=0 && weather_code<=3)
 				{
-			//		lv_label_set_text(guider_ui.screen_1_tianqi, "æ™?");
+			//		lv_label_set_text(guider_ui.screen_1_tianqi, "ï¿½?");
 					lv_img_set_src(guider_ui.screen_1_rain,&_sun_alpha_35x35);
 				}
 				else if(weather_code>=4 && weather_code<=9)
@@ -539,13 +539,13 @@ void vTaskUPDATE ( void * pvParameters )
 				}
 				else if(weather_code>=10 && weather_code<=20)
 				{  
-			//	  lv_label_set_text(guider_ui.screen_1_tianqi, "é›?");
+			//	  lv_label_set_text(guider_ui.screen_1_tianqi, "ï¿½?");
 			//		lv_img_set_src(guider_ui.screen_1_rain,&_rainsmall_alpha_35x35);
 					lv_img_set_src(guider_ui.screen_1_rain,&_rainsmall_alpha_35x35);
 				}
 				if(weather_nb_code>=0 && weather_nb_code<=3)
 				{
-			//		lv_label_set_text(guider_ui.screen_1_tianqi, "æ™?");
+			//		lv_label_set_text(guider_ui.screen_1_tianqi, "ï¿½?");
 					lv_img_set_src(guider_ui.screen_1_img_7_15,&_sun_alpha_35x35);
 				}
 				else if(weather_nb_code>=4 && weather_nb_code<=9)
@@ -556,7 +556,7 @@ void vTaskUPDATE ( void * pvParameters )
 				}
 				else if(weather_nb_code>=10 && weather_nb_code<=20)
 				{  
-			//	  lv_label_set_text(guider_ui.screen_1_tianqi, "é›?");
+			//	  lv_label_set_text(guider_ui.screen_1_tianqi, "ï¿½?");
 			//		lv_img_set_src(guider_ui.screen_1_rain,&_rainsmall_alpha_35x35);
 					lv_img_set_src(guider_ui.screen_1_img_7_15,&_rainsmall_alpha_35x35);
 				}
@@ -565,34 +565,34 @@ void vTaskUPDATE ( void * pvParameters )
   }	
 }
 
-//Èí¼þ¶¨Ê±Æ÷»Øµ÷º¯Êý£¬Ïàµ±ÓÚÖ®Ç°¶¨Ê±Æ÷µÄÖÐ¶Ï·þÎñº¯Êý  ²»ÊÇ²»ÍË³öµÄÑ­»·
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½àµ±ï¿½ï¿½Ö®Ç°ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ë³ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 void vCallbackFunction_Time1( TimerHandle_t xTimer )
-{ //ÈÕ¸üÌìÆøÏûÏ¢
+{ //ï¿½Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	uint8_t update_Message=1;
 	xQueueSend(xQueue_Update,&update_Message,0);
 }
 void vTaskIWDG( void * pvParameters )
-{ //Î¹¹·
+{ //Î¹ï¿½ï¿½
 	for( ;; )
 	{			
 		IWDG_Feed();
-		vTaskDelay(2000);  //ÏµÍ³µÄÑÓÊ±,»áÊÍ·ÅCPU  ²ÎÊý:ÒªÑÓÊ±µÄ½ÚÅÄÊý 
+		vTaskDelay(2000);  //ÏµÍ³ï¿½ï¿½ï¿½ï¿½Ê±,ï¿½ï¿½ï¿½Í·ï¿½CPU  ï¿½ï¿½ï¿½ï¿½:Òªï¿½ï¿½Ê±ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	}
 }
 
-//Èí¼þ¶¨Ê±Æ÷»Øµ÷º¯Êý£¬Ïàµ±ÓÚÖ®Ç°¶¨Ê±Æ÷µÄÖÐ¶Ï·þÎñº¯Êý  ²»ÊÇ²»ÍË³öµÄÑ­»·
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½àµ±ï¿½ï¿½Ö®Ç°ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ë³ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 void vCallbackFunction_Time2( TimerHandle_t xTimer )
-{printf("Èí¼þ¶¨Ê±Æ÷2µÄ»Øµ÷º¯Êý´¥·¢\r\n");
+{printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½2ï¿½Ä»Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 }
 void vCallbackFunction_Time( TimerHandle_t xTimer )
-{	//¶¨Ê±Æ÷¸üÐÂ
+{	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	uint8_t Buff[50];
   uint8_t Buff1[50];	
 	uint8_t Buff2[50];
   Now_Time_Cnt=RTC_GetCounter();   
-  //»ñÈ¡µ±Ç°µÄRTC¼ÆÊýÖµ 
-  Now_Time=localtime(&Now_Time_Cnt);  //°Ñ»ñÈ¡µÄÊ±¼ä´Á×ª»»³ÉÊ±¼ä½á¹¹Ìå 
-  //¸üÐÂÊ±¼ä 
+  //ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½RTCï¿½ï¿½ï¿½ï¿½Öµ 
+  Now_Time=localtime(&Now_Time_Cnt);  //ï¿½Ñ»ï¿½È¡ï¿½ï¿½Ê±ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½á¹¹ï¿½ï¿½ 
+  //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ 
   sprintf((char *)Buff,"%02d:%02d:%02d",Now_Time->tm_hour,Now_Time->tm_min,Now_Time->tm_sec);
   sprintf((char *)Buff1,"%04d",Now_Time->tm_year+1900);
 	sprintf((char *)Buff2,"%02d.%02d",Now_Time->tm_mon+1,Now_Time->tm_mday);
@@ -601,15 +601,15 @@ void vCallbackFunction_Time( TimerHandle_t xTimer )
   lv_label_set_text(guider_ui.screen_1_time,(char *)Buff); 
 	lv_label_set_text(guider_ui.screen_1_year,(char *)Buff1);
 	lv_label_set_text(guider_ui.screen_1_monday,(char *)Buff2);
-  //¸üÐÂÕûÊý·½·¨ 
+  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
   lv_label_set_text_fmt(guider_ui.screen_1_label_16,"%02d",Dht.Hum);
 	lv_label_set_text_fmt(guider_ui.screen_1_label_12,"%02d",Sensor.CO2);
-	//¸üÐÂÐ¡Êý·½·¨1 
+	//ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1 
   sprintf((char *)Buff,"%.1f",Dht.Tem); 
   // 
   lv_label_set_text(guider_ui.screen_1_label_10,(char *)Buff); 
-  //¸üÐÂÐ¡Êý·½·¨2 
-  //Èç¹ûÊ¹ÓÃ¸Ãº¯Êý¸üÐÂÐ¡Êý,ÐèÒª°Ñ#  define LV_SPRINTF_DISABLE_FLOAT 1¸Ä³É0 
+  //ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2 
+  //ï¿½ï¿½ï¿½Ê¹ï¿½Ã¸Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½,ï¿½ï¿½Òªï¿½ï¿½#  define LV_SPRINTF_DISABLE_FLOAT 1ï¿½Ä³ï¿½0 
   lv_label_set_text_fmt(guider_ui.screen_1_label_14,"%.1f",Dht.Tem);
 	lv_label_set_text_fmt(guider_ui.screen_1_label_10,"%.1f",LightInten);
 	
@@ -642,58 +642,58 @@ void Delay(void)
 }
 
 #endif
-//ÈÎÎñÕ»ÇøÒç³ö¼ì²âº¯Êý  ÔÚFreeRTOSConfig.hÎÄ¼þÖÐÔö¼ÓÏÂÃæµÄºê  #define INCLUDE_uxTaskGetStackHighWaterMark 1
+//ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½âº¯ï¿½ï¿½  ï¿½ï¿½FreeRTOSConfig.hï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½  #define INCLUDE_uxTaskGetStackHighWaterMark 1
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char * pcTaskName )
-{ printf("ÈÎÎñÕ»ÇøÒç³öÁË\r\n");
+{ printf("ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 	UBaseType_t uxHighWaterMark;
-	//»ñÈ¡Ä¿Ç°ÈÎÎñ»¹Ê£Óà¶àÉÙ¿Õ¼äÄÜÓÃ
+	//ï¿½ï¿½È¡Ä¿Ç°ï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½Ù¿Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	uxHighWaterMark = uxTaskGetStackHighWaterMark( xTask );
-	//																				µ±Ç°ÏµÍ³Ê±¼ä					ÈÎÎñÃû×Ö			Ê£Óà¿Õ¼ä
+	//																				ï¿½ï¿½Ç°ÏµÍ³Ê±ï¿½ï¿½					ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			Ê£ï¿½ï¿½Õ¼ï¿½
 	printf ("%u : StackOverflow:%s(%lu)\r\n", xTaskGetTickCount(), pcTaskName, uxHighWaterMark);	
 	while(1)
 	{
-//		NVIC_SystemReset();  //ÈÃµ¥Æ¬»úÖØÆô
+//		NVIC_SystemReset();  //ï¿½Ãµï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 }
 
-//ÄÚ´æÉêÇëÊ§°Ü¹³×Óº¯Êý  ÔÚFreeRTOSConfig.hÎÄ¼þÖÐºêÖÃ1 #define configUSE_MALLOC_FAILED_HOOK 1 //Ê¹ÓÃÄÚ´æÉêÇëÊ§°Ü¹³×Óº¯Êý
+//ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¹ï¿½ï¿½Óºï¿½ï¿½ï¿½  ï¿½ï¿½FreeRTOSConfig.hï¿½Ä¼ï¿½ï¿½Ðºï¿½ï¿½ï¿½1 #define configUSE_MALLOC_FAILED_HOOK 1 //Ê¹ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¹ï¿½ï¿½Óºï¿½ï¿½ï¿½
 void vApplicationMallocFailedHook (void)
-{ printf("ÄÚ´æÉêÇëÊ§°Ü\r\n");
+{ printf("ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½\r\n");
 	while(1)
 	{
-//		NVIC_SystemReset();  //ÈÃµ¥Æ¬»úÖØÆô		
+//		NVIC_SystemReset();  //ï¿½Ãµï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½		
 	}
 }
 
-//Ê±¼äÆ¬¹³×Óº¯Êý,Ã¿¸ö½ÚÅÄµ÷ÓÃ1´Î   #define configTICK_RATE_HZ ( ( TickType_t ) 1000 ) //RTOS Ïµ Í³ ½ÚÅÄÖÐ¶ÏµÄÆµÂÊ¡£
-//¼´Ò»ÃëÖÐ¶ÏµÄ´ÎÊý£¬Ã¿´ÎÖÐ¶Ï RTOS ¶¼»á½øÐÐÈÎÎñµ÷¶È
-//×¢Òâ:°Ñ¸ÃºêÖÃ1  #define configUSE_TICK_HOOK 1 //ÖÃ 1£ºÊ¹ÓÃÊ±¼äÆ¬¹³×Ó£¨Tick Hook£©£»ÖÃ 0£ººöÂÔÊ±¼äÆ¬¹³×Ó
-//²»ÄÜÊÇËÀÑ­»·   
+//Ê±ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½Óºï¿½ï¿½ï¿½,Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½1ï¿½ï¿½   #define configTICK_RATE_HZ ( ( TickType_t ) 1000 ) //RTOS Ïµ Í³ ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ïµï¿½Æµï¿½Ê¡ï¿½
+//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ð¶ÏµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ð¶ï¿½ RTOS ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//×¢ï¿½ï¿½:ï¿½Ñ¸Ãºï¿½ï¿½ï¿½1  #define configUSE_TICK_HOOK 1 //ï¿½ï¿½ 1ï¿½ï¿½Ê¹ï¿½ï¿½Ê±ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½Ó£ï¿½Tick Hookï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½   
 void vApplicationTickHook(void)
-{//½Ó¿ÚµÄÊÊÅä  24
-	lv_tick_inc(1);  //¸æËßLVGL¹ýÈ¥ÁË1ms
+{//ï¿½Ó¿Úµï¿½ï¿½ï¿½ï¿½ï¿½  24
+	lv_tick_inc(1);  //ï¿½ï¿½ï¿½ï¿½LVGLï¿½ï¿½È¥ï¿½ï¿½1ms
 }
 
-//#if (USE_STD_LIB==0) //Ö»ÒªÊ¹ÓÃÖÐ¶Ï£¬±ØÐëµ÷ÓÃÖÐ¶Ï·Ö×é
-//	NVIC_SetPriorityGrouping(5);    //ÖÐ¶ÏÓÅÏÈ¼¶·Ö×é£¬¿ª»úµ÷ÓÃ1´Î
-////core_cm3.h 1430ÐÐ    ·Ö×éÈ·¶¨Ö®ºó£¬ÇÀÕ¼ºÍ´Î¼¶ÓÅÏÈ¼¶ÒªÔÚÔÊÐí·¶Î§ÄÚ
+//#if (USE_STD_LIB==0) //Ö»ÒªÊ¹ï¿½ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½
+//	NVIC_SetPriorityGrouping(5);    //ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½
+////core_cm3.h 1430ï¿½ï¿½    ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½Í´Î¼ï¿½ï¿½ï¿½ï¿½È¼ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½
 //#elif (USE_STD_LIB==1)	
-////void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup);	misc.h 196ÐÐ
+////void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup);	misc.h 196ï¿½ï¿½
 //	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 //#endif
 
-////__STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)	misc.h 1827ÐÐ
+////__STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)	misc.h 1827ï¿½ï¿½
 //	SysTick_Config(SystemCoreClock/1000);
-///*ÖÐ¶ÏÖÜÆÚµÄÈ·¶¨
-//	1.	¸ù¾ÝÑ¡ÔñµÄÊ±ÖÓÔ´£¬CTRL¼Ä´æÆ÷µÄÎ»2ÖÃ1£¬Ñ¡ÔñAHB(72M)×÷ÎªÊ±ÖÓÔ´
-//	2.	ËùÒÔ¼ÆÊýµÄÆµÂÊF=72M
-//	3.	¸üÐÂ1´ÎÊý¾ÝµÄÊ±¼ät=1/F=1/72000000 s
-//	4.	¶¨Ê±Æ÷µÄÖÐ¶Ï´¥·¢ÖÜÆÚT=ARR*t   ARR:Ö¸ÖØ×°ÔØÖµ£¬Ò²¾ÍÊÇLOAD¼Ä´æÆ÷Öµ
-//	5.	¼ÙÈçÏëÒª1msµÄÖÜÆÚT£¬ÐèÒª¼Æ¶àÉÙ´ÎÊý£¿
+///*ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Úµï¿½È·ï¿½ï¿½
+//	1.	ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ô´ï¿½ï¿½CTRLï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Î»2ï¿½ï¿½1ï¿½ï¿½Ñ¡ï¿½ï¿½AHB(72M)ï¿½ï¿½ÎªÊ±ï¿½ï¿½Ô´
+//	2.	ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½F=72M
+//	3.	ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Ê±ï¿½ï¿½t=1/F=1/72000000 s
+//	4.	ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½T=ARR*t   ARR:Ö¸ï¿½ï¿½×°ï¿½ï¿½Öµï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½LOADï¿½Ä´ï¿½ï¿½ï¿½Öµ
+//	5.	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òª1msï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½Òªï¿½Æ¶ï¿½ï¿½Ù´ï¿½ï¿½ï¿½ï¿½ï¿½
 //	T=ARR*t=1ms=0.001s=ARR*1/72000000 s
 //	ARR= T/t=1ms/(1/72000000 s)=72000
-//	ËùÒÔARR=72000
-//ÖÐ¶Ïµ½À´Ö®ºó£¬×Ô¶¯µ÷ÓÃ  SysTick_Handler
+//	ï¿½ï¿½ï¿½ï¿½ARR=72000
+//ï¿½Ð¶Ïµï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½  SysTick_Handler
 //*/
 
 /*GPIOE->CRL &= ~(0x0F<<20);
@@ -714,25 +714,25 @@ GPIOA->IDR & (0x01<<0)
 GPIOA->IDR                XXXX XXXX XXXX XXXX 
 (0x01<<0)                 0000 0000 0000 0001
 GPIOA->IDR & (0x01<<0)    0000 0000 0000 000X
-¶ÔÓÚPA0°´¼ü  
-µÃµ½µÄ½á¹û                0000 0000 0000 0001 °´ÏÂÁË
-µÃµ½µÄ½á¹û                0000 0000 0000 0000 Î´°´ÏÂ
+ï¿½ï¿½ï¿½ï¿½PA0ï¿½ï¿½ï¿½ï¿½  
+ï¿½Ãµï¿½ï¿½Ä½ï¿½ï¿½                0000 0000 0000 0001 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½Ãµï¿½ï¿½Ä½ï¿½ï¿½                0000 0000 0000 0000 Î´ï¿½ï¿½ï¿½ï¿½
 
 GPIOC->IDR & (0x01<<4)
 GPIOC->IDR                XXXX XXXX XXXX XXXX 
 (0x01<<4)                 0000 0000 0001 0000
 GPIOC->IDR & (0x01<<4)    0000 0000 000X 0000
-¶ÔÓÚPC4°´¼ü  
-µÃµ½µÄ½á¹û                0000 0000 0001 0000 Î´°´ÏÂ
-µÃµ½µÄ½á¹û                0000 0000 0000 0000 °´ÏÂÁË
+ï¿½ï¿½ï¿½ï¿½PC4ï¿½ï¿½ï¿½ï¿½  
+ï¿½Ãµï¿½ï¿½Ä½ï¿½ï¿½                0000 0000 0001 0000 Î´ï¿½ï¿½ï¿½ï¿½
+ï¿½Ãµï¿½ï¿½Ä½ï¿½ï¿½                0000 0000 0000 0000 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 /*
-ÑéÖ¤vTaskDelayºÍDelay_msµÄÇø±ð		
-vTaskDelay(1000);  //ÏµÍ³µÄÑÓÊ±  ²ÎÊý:ÒªÑÓÊ±µÄ½ÚÅÄÊý  
-½ÚÅÄÓÉ¾ö¶¨£º#define configTICK_RATE_HZ ( ( TickType_t ) 1000 ) //RTOS Ïµ Í³ ½ÚÅÄÖÐ¶ÏµÄÆµÂÊ¡£¼´Ò»ÃëÖÐ¶ÏµÄ´ÎÊý£¬Ã¿´ÎÖÐ¶Ï RTOS ¶¼»á½øÐÐÈÎÎñµ÷¶È
-Èç¹ûÕâ¸öºêÊÇ1000,ÄÇÃ´Ò»¸ö½ÚÅÄ¾ÍÊÇ1s/1000=1ms
+ï¿½ï¿½Ö¤vTaskDelayï¿½ï¿½Delay_msï¿½ï¿½ï¿½ï¿½ï¿½ï¿½		
+vTaskDelay(1000);  //ÏµÍ³ï¿½ï¿½ï¿½ï¿½Ê±  ï¿½ï¿½ï¿½ï¿½:Òªï¿½ï¿½Ê±ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½  
+ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½#define configTICK_RATE_HZ ( ( TickType_t ) 1000 ) //RTOS Ïµ Í³ ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ïµï¿½Æµï¿½Ê¡ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ð¶ÏµÄ´ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ð¶ï¿½ RTOS ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1000,ï¿½ï¿½Ã´Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½1s/1000=1ms
 	
-vTaskDelay	 »áÖ÷¶¯ÊÍ·ÅCPU
-Delay_ms     ²»»áÊÍ·ÅCPU£¬ÏëÒ»Ö±Õ¼ÓÃ*/
+vTaskDelay	 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½CPU
+Delay_ms     ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½CPUï¿½ï¿½ï¿½ï¿½Ò»Ö±Õ¼ï¿½ï¿½*/
 
 
