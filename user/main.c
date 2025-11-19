@@ -59,7 +59,7 @@ TaskHandle_t xLvglTaskHandle = NULL;  //�ӿڵ�����  25
 TaskHandle_t xHandle_UPDATE = NULL;
 TaskHandle_t xHandle_IWDG = NULL;
 
-//���,�����������������֤
+
 SemaphoreHandle_t xSemaphore = NULL;    //������ֵ�ź������
 SemaphoreHandle_t xSemaphore_Count = NULL;    //���������ź������
 SemaphoreHandle_t xSemaphore_Mutex = NULL;    //���������ź������  
