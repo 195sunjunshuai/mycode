@@ -1,0 +1,230 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.27.1.0
+Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 1, 1, LIC=D0D7S-LCCHI-SB5EJ-USZNU-B2KW9-U5LGK
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.27.1.0
+Toolchain Path:  C:\xiazai\keil_5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.27.1.0
+Dialog DLL:      DCM.DLL V1.17.2.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.6.0
+Dialog DLL:      TCM.DLL V1.36.1.0
+ 
+<h2>Project:</h2>
+C:\Demo\project\Demo.uvprojx
+Project File Date:  10/14/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\xiazai\keil_5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+compiling main.c...
+..\user\API\led.h(4): warning:  #1295-D: Deprecated declaration LED_Config - give arg types
+  void LED_Config();
+..\user\API\led.h(5): warning:  #1295-D: Deprecated declaration LED1_ON - give arg types
+  void LED1_ON();
+..\user\API\led.h(6): warning:  #1295-D: Deprecated declaration LED2_ON - give arg types
+  void LED2_ON();
+..\user\API\led.h(7): warning:  #1295-D: Deprecated declaration LED3_ON - give arg types
+  void LED3_ON();
+..\user\API\led.h(8): warning:  #1295-D: Deprecated declaration LED4_ON - give arg types
+  void LED4_ON();
+..\user\API\led.h(9): warning:  #1295-D: Deprecated declaration LED1_OFF - give arg types
+  void LED1_OFF();
+..\user\API\led.h(10): warning:  #1295-D: Deprecated declaration LED2_OFF - give arg types
+  void LED2_OFF();
+..\user\API\led.h(11): warning:  #1295-D: Deprecated declaration LED3_OFF - give arg types
+  void LED3_OFF();
+..\user\API\led.h(12): warning:  #1295-D: Deprecated declaration LED4_OFF - give arg types
+  void LED4_OFF();
+..\user\API\led.h(13): warning:  #1295-D: Deprecated declaration LED1_TOGGLE - give arg types
+  void LED1_TOGGLE();
+..\user\API\led.h(14): warning:  #1295-D: Deprecated declaration LED2_TOGGLE - give arg types
+  void LED2_TOGGLE();
+..\user\API\led.h(15): warning:  #1295-D: Deprecated declaration LED3_TOGGLE - give arg types
+  void LED3_TOGGLE();
+..\user\API\led.h(16): warning:  #1295-D: Deprecated declaration LED4_TOGGLE - give arg types
+  void LED4_TOGGLE();
+..\user\API\led.h(17): warning:  #1295-D: Deprecated declaration RGB_Config - give arg types
+  void RGB_Config();
+..\user\API\led.h(18): warning:  #1295-D: Deprecated declaration RGB_R_ON - give arg types
+  void RGB_R_ON();
+..\user\API\led.h(19): warning:  #1295-D: Deprecated declaration RGB_R_OFF - give arg types
+  void RGB_R_OFF();
+..\user\API\led.h(20): warning:  #1295-D: Deprecated declaration RGB_G_ON - give arg types
+  void RGB_G_ON();
+..\user\API\led.h(21): warning:  #1295-D: Deprecated declaration RGB_G_OFF - give arg types
+  void RGB_G_OFF();
+..\user\API\led.h(22): warning:  #1295-D: Deprecated declaration RGB_B_ON - give arg types
+  void RGB_B_ON();
+..\user\API\led.h(23): warning:  #1295-D: Deprecated declaration RGB_B_OFF - give arg types
+  void RGB_B_OFF();
+..\user\API\led.h(24): warning:  #1295-D: Deprecated declaration RGB_B_Show - give arg types
+  void RGB_B_Show();
+..\user\API\led.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\key1.h(7): warning:  #1295-D: Deprecated declaration KEY_Scan - give arg types
+  uint8_t KEY_Scan();
+..\user\API\key1.h(8): warning:  #1295-D: Deprecated declaration Key_Handle - give arg types
+  void Key_Handle();
+..\user\API\key1.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif 
+..\user\API\ele_machine.h(4): warning:  #1295-D: Deprecated declaration Machine_Config - give arg types
+  void Machine_Config();
+..\user\API\ele_machine.h(5): warning:  #1295-D: Deprecated declaration Machine_forward - give arg types
+  void Machine_forward();
+..\user\API\ele_machine.h(6): warning:  #1295-D: Deprecated declaration Machine_forward_3 - give arg types
+  void Machine_forward_3();
+..\user\API\ele_machine.h(7): warning:  #1295-D: Deprecated declaration Machine_forward_2 - give arg types
+  void Machine_forward_2();
+..\user\API\ele_machine.h(8): warning:  #1295-D: Deprecated declaration Machine_forward_1 - give arg types
+  void Machine_forward_1();
+..\user\API\ele_machine.h(9): warning:  #1295-D: Deprecated declaration Machine_forward_0 - give arg types
+  void Machine_forward_0();
+..\user\API\ele_machine.h(10): warning:  #1295-D: Deprecated declaration Machine_reverse - give arg types
+  void Machine_reverse();
+..\user\API\ele_machine.h(11): warning:  #1295-D: Deprecated declaration Machine_Stop - give arg types
+  void Machine_Stop();
+..\user\API\ele_machine.h(12): warning:  #1295-D: Deprecated declaration Machine_TOGGLE - give arg types
+  void Machine_TOGGLE();
+..\user\API\ele_machine.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\relay.h(4): warning:  #1295-D: Deprecated declaration RELAY_Config - give arg types
+  void RELAY_Config();
+..\user\API\relay.h(5): warning:  #1295-D: Deprecated declaration RELAY_ON - give arg types
+  void RELAY_ON();
+..\user\API\relay.h(6): warning:  #1295-D: Deprecated declaration RELAY_OFF - give arg types
+  void RELAY_OFF();
+..\user\API\relay.h(7): warning:  #1295-D: Deprecated declaration RELAY_TOGGLE - give arg types
+  void RELAY_TOGGLE();
+..\user\API\delay.h(16): warning:  #1295-D: Deprecated declaration Delay_1us - give arg types
+  void Delay_1us();
+..\user\API\delay.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\main.h(61): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\exti.h(9): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\tim6.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\tim7.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\uart1.h(4): warning:  #1295-D: Deprecated declaration UART1_Config - give arg types
+  void UART1_Config();
+..\user\API\uart1.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\main.h(32): warning:  #1295-D: Deprecated declaration Creat_Task - give arg types
+  void Creat_Task();
+..\user\main.h(61): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\kqm.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\su03t.h(73): warning:  #1295-D: Deprecated declaration _uart_PlayMachine1 - give arg types
+  void _uart_PlayMachine1();
+..\user\API\su03t.h(76): warning:  #1295-D: Deprecated declaration _uart_PlayMachine2 - give arg types
+  void _uart_PlayMachine2();
+..\user\API\su03t.h(79): warning:  #1295-D: Deprecated declaration _uart_PlayMachine3 - give arg types
+  void _uart_PlayMachine3();
+..\user\API\su03t.h(83): warning:  #1-D: last line of file ends without a newline
+  #endif 
+..\user\API\dht.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\pwm.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\bh1750.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\spi.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\w25q64.h(25): warning:  #1295-D: Deprecated declaration W25Q64_ReadID_0x90 - give arg types
+  void W25Q64_ReadID_0x90();
+..\user\API\w25q64.h(26): warning:  #1295-D: Deprecated declaration W25Q64_ReadID_0x9F - give arg types
+  void W25Q64_ReadID_0x9F();
+..\user\API\w25q64.h(36): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\adc.h(6): warning:  #1295-D: Deprecated declaration ADC_Config - give arg types
+  void ADC_Config();
+..\user\API\adc.h(7): warning:  #1295-D: Deprecated declaration ADC_Handle - give arg types
+  void ADC_Handle();
+..\user\API\adc.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\dma.h(7): warning:  #1295-D: Deprecated declaration ADC_DMA_Config - give arg types
+  void ADC_DMA_Config();
+..\user\API\dma.h(8): warning:  #1295-D: Deprecated declaration ADC_DMA_Handle - give arg types
+  void ADC_DMA_Handle();
+..\user\API\dma.h(9): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\rtc.h(15): warning:  #1295-D: Deprecated declaration RTC_Config - give arg types
+  void RTC_Config();
+..\user\API\rtc.h(16): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\API\mqtt.h(24): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\lvgl\generated\guider_fonts\guider_fonts.h(20): warning:  #1-D: last line of file ends without a newline
+      
+..\lvgl\generated\gui_guider.h(99): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\lvgl\generated\events_init.h(20): warning:  #1-D: last line of file ends without a newline
+  #endif /* EVENT_CB_H_ */
+..\lvgl\app\w25q_lvgl_img.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\user\main.c(268): warning:  #177-D: variable "freeheap"  was declared but never referenced
+  					  uint32_t freeheap=0;
+..\user\main.c(269): warning:  #177-D: variable "taskinfo"  was declared but never referenced
+  	TaskStatus_t taskinfo;//ÈÎÎñ×´Ì¬
+..\user\main.c(529): warning:  #186-D: pointless comparison of unsigned integer with zero
+  				if(weather_code>=0 && weather_code<=3)
+..\user\main.c(546): warning:  #186-D: pointless comparison of unsigned integer with zero
+  				if(weather_nb_code>=0 && weather_nb_code<=3)
+..\user\main.c(599): warning:  #870-D: invalid multibyte character sequence
+  	char *week_str[] = {"æ—? ","ä¸€ ","äº? ","ä¸? ","å›? ","äº? ","å…? "};
+..\user\main.c(599): warning:  #870-D: invalid multibyte character sequence
+  	char *week_str[] = {"æ—? ","ä¸€ ","äº? ","ä¸? ","å›? ","äº? ","å…? "};
+..\user\main.c(599): warning:  #870-D: invalid multibyte character sequence
+  	char *week_str[] = {"æ—? ","ä¸€ ","äº? ","ä¸? ","å›? ","äº? ","å…? "};
+..\user\main.c(599): warning:  #870-D: invalid multibyte character sequence
+  	char *week_str[] = {"æ—? ","ä¸€ ","äº? ","ä¸? ","å›? ","äº? ","å…? "};
+..\user\main.c(599): warning:  #870-D: invalid multibyte character sequence
+  	char *week_str[] = {"æ—? ","ä¸€ ","äº? ","ä¸? ","å›? ","äº? ","å…? "};
+..\user\main.c(599): warning:  #870-D: invalid multibyte character sequence
+  	char *week_str[] = {"æ—? ","ä¸€ ","äº? ","ä¸? ","å›? ","äº? ","å…? "};
+..\user\main.c: 84 warnings, 0 errors
+linking...
+Program Size: Code=164040 RO-data=320220 RW-data=1112 ZI-data=48920  
+FromELF: creating hex file...
+After Build - User command #1: C:\xiazai\keil_5\ARM\ARMCC\bin\fromelf.exe --bin -o .\Objects\Demo.bin .\Objects\Demo.axf
+".\Objects\Demo.axf" - 0 Error(s), 84 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.5.1.pack
+                ARM.CMSIS.5.5.1
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.2.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.1.0.5.pack
+                Keil.STM32F1xx_DFP.1.0.5
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_Target_1
+  C:\xiazai\keil_5\ARM\CMSIS\5.5.1\CMSIS\Core\Include
+  C:\xiazai\keil_5\Keil\STM32F1xx_DFP\1.0.5\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.2.0
+Build Time Elapsed:  00:00:03
+</pre>
+</body>
+</html>
